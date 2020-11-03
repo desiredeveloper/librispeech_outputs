@@ -1,0 +1,1387 @@
+      <!doctype html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+            <style type="text/css">
+  table {
+  border-spacing:0;
+  }
+
+  * {
+  box-sizing:border-box;
+  }
+
+  .container {
+  width:100%;
+  padding-left:30px;
+  padding-right:30px;
+  }
+
+  .blob-wrapper {
+  overflow-x:auto;
+  overflow-y:hidden;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+  }
+
+  .diff-table {
+  width:100%;
+  border-collapse:separate;
+  }
+
+  .diff-table tr:not(:last-child) .line-comments {
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+  }
+
+  .blob-num {
+  width:1%;
+  min-width:50px;
+  padding-left:10px;
+  padding-right:10px;
+  font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  font-size:12px;
+  line-height:18px;
+  color:rgba(0,0,0,0.3);
+  vertical-align:top;
+  text-align:right;
+  border:solid #eee;
+  cursor:pointer;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  border-width:0 1px 0 0;
+  }
+
+  .blob-num:hover {
+  color:rgba(0,0,0,0.6);
+  }
+
+  .blob-num:before {
+  content:attr(data-line-number);
+  }
+
+  .blob-num.non-expandable:hover {
+  color:rgba(0,0,0,0.3);
+  }
+
+  .blob-code {
+  position:relative;
+  padding-left:10px;
+  padding-right:10px;
+  font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  font-size:12px;
+  color:#333;
+  vertical-align:top;
+  white-space:pre;
+  overflow:visible;
+  }
+
+  .blob-code .x-first {
+  border-top-left-radius:.2em;
+  border-bottom-left-radius:.2em;
+  }
+
+  .blob-code .x-last {
+  border-top-right-radius:.2em;
+  border-bottom-right-radius:.2em;
+  }
+
+  .blob-code-addition {
+  background-color:#eaffea;
+  }
+
+  .blob-code-addition .x {
+  background-color:#a6f3a6;
+  }
+
+  .blob-num-addition {
+  background-color:#dbffdb;
+  border-color:#c1e9c1;
+  }
+
+  .blob-code-deletion {
+  background-color:#ffecec;
+  }
+
+  .blob-code-deletion .x {
+  background-color:#f8cbcb;
+  }
+
+  .blob-num-deletion {
+  background-color:#fdd;
+  border-color:#f1c0c0;
+  }
+
+  .selected-line.blob-code {
+  background-color:#f8eec7;
+  }
+
+  .selected-line.blob-num {
+  background-color:#f6e8b5;
+  border-color:#f0db88;
+  }
+
+  .file-diff-split .blob-code {
+  width:49%;
+  white-space:pre-wrap;
+  word-break:break-word;
+  }
+
+  .file-diff-split .empty-cell {
+  cursor:default;
+  background-color:#fafafa;
+  border-right-color:#eee;
+  }
+
+  .file {
+  position:relative;
+  margin-top:20px;
+  margin-bottom:15px;
+  border:1px solid #ddd;
+  border-radius:3px;
+  }
+
+  .file .meta {
+  text-shadow:0 1px 0 #fff;
+  border-bottom:1px solid #d8d8d8;
+  background-color:#f7f7f7;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+  padding:5px 10px;
+  }
+  </style>
+      </head>
+      <body>
+          <script type="text/javascript">
+  !function () {
+    document.addEventListener('click', function (event) {
+      var target = event.target
+      var classNames = target.className.split(/\s+/)
+      if (classNames.indexOf('js-linkable-line-number') !== -1) {
+        var hash = target.getAttribute('id')
+        window.location.hash = hash
+      }
+    }, false)
+  }()
+</script>
+
+        <div class="container">
+        <div class="file">
+        <div class="data highlight blob-wrapper">
+          <table class="diff-table file-diff-split">
+          <tbody>
+      <tr>
+      <td id="L1" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="1"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R1" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="1"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L2" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="2"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R2" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="2"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L3" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="3"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R3" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="3"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L4" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="4"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R4" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="4"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L5" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="5"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R5" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="5"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water<span class="x x-first x-last">p</span>&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L6" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="6"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R6" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="6"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L7" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="7"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R7" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="7"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L8" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="8"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R8" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="8"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L9" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="9"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R9" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="9"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L10" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="10"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R10" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="10"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L11" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="11"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R11" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="11"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L12" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="12"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R12" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="12"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L13" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="13"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R13" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="13"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L14" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="14"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R14" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="14"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L15" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="15"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R15" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="15"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L16" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="16"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R16" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="16"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L17" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="17"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R17" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="17"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L18" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="18"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R18" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="18"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L19" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="19"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissi<span class="x x-first x-last">tud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R19" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="19"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissi<span class="x x-first x-last">v</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L20" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="20"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R20" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="20"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L21" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="21"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R21" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="21"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L22" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="22"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R22" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="22"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L23" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="23"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R23" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="23"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L24" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="24"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R24" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="24"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L25" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="25"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R25" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="25"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L26" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="26"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R26" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="26"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L27" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="27"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R27" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="27"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L28" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="28"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R28" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="28"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L29" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="29"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R29" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="29"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L30" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="30"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R30" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="30"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L31" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="31"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">in</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R31" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="31"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">and</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L32" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="32"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R32" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="32"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L33" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="33"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R33" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="33"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L34" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="34"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R34" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="34"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L35" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="35"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">u</span>nt<span class="x x-first x-last">il</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R35" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="35"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">i</span>nt<span class="x x-first x-last">o</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L36" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="36"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R36" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="36"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L37" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="37"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R37" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="37"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water<span class="x x-first x-last">p</span>&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L38" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="38"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R38" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="38"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L39" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="39"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R39" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="39"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L40" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="40"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R40" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="40"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L41" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="41"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ni<span class="x x-first x-last">nety</span>&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R41" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="41"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ni<span class="x x-first x-last">ght</span>&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L42" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="42"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R42" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="42"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L43" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="43"></td>
+      <td class="blob-code blob-code-deletion base"><span class="x x-first x-last">the</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R43" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="43"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;but</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L44" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="44"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R44" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="44"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L45" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="45"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R45" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="45"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L46" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="46"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R46" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="46"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L47" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="47"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R47" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="47"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L48" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="48"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R48" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="48"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L49" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="49"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R49" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="49"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L50" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="50"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R50" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="50"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L51" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="51"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;i<span class="x x-first x-last">n</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R51" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="51"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;i<span class="x x-first x-last">t</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L52" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="52"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R52" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="52"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L53" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="53"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissi<span class="x x-first x-last">tud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R53" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="53"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissi<span class="x x-first x-last">v</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L54" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="54"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R54" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="54"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L55" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="55"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R55" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="55"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L56" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="56"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R56" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="56"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L57" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="57"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla<span class="x x-first x-last">nt</span>&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R57" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="57"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L58" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="58"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R58" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="58"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L59" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="59"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R59" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="59"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">had</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L60" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="60"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R60" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="60"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L61" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="61"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>ciss<span class="x x-first x-last">itud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R61" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="61"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisse<span class="x x-first x-last">d</span>s&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L62" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="62"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R62" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="62"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L63" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="63"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">in</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R63" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="63"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">and</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L64" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="64"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R64" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="64"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L65" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="65"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">u</span>nt<span class="x x-first x-last">il</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R65" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="65"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">i</span>nt<span class="x x-first x-last">o</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L66" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="66"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R66" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="66"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L67" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="67"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;vicissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R67" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="67"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;vicissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L68" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="68"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R68" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="68"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L69" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="69"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R69" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="69"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L70" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="70"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R70" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="70"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L71" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="71"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R71" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="71"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water<span class="x x-first x-last">p</span>&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L72" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="72"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R72" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="72"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L73" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="73"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R73" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="73"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L74" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="74"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R74" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="74"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L75" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="75"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plan<span class="x x-first x-last">t</span>&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R75" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="75"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plan&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L76" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="76"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R76" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="76"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L77" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="77"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R77" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="77"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L78" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="78"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R78" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="78"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L79" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="79"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R79" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="79"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;<span class="x x-first x-last">be</span>for<span class="x x-first x-last">e</span>&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L80" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="80"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R80" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="80"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L81" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="81"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ni<span class="x x-first x-last">nety</span>&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R81" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="81"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ni<span class="x x-first x-last">ght</span>&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L82" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="82"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R82" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="82"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L83" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="83"></td>
+      <td class="blob-code blob-code-deletion base"><span class="x x-first x-last">the</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R83" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="83"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;but</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L84" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="84"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R84" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="84"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L85" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="85"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R85" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="85"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L86" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="86"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R86" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="86"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L87" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="87"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R87" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="87"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L88" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="88"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R88" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="88"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L89" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="89"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;i<span class="x x-first x-last">n</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R89" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="89"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;i<span class="x x-first x-last">t</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L90" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="90"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R90" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="90"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L91" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="91"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R91" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="91"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L92" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="92"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R92" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="92"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L93" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="93"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R93" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="93"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L94" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="94"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R94" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="94"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L95" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="95"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R95" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="95"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L96" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="96"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R96" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="96"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L97" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="97"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissi<span class="x x-first x-last">tud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R97" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="97"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissi<span class="x x-first x-last">v</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L98" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="98"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R98" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="98"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L99" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="99"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R99" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="99"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cis<span class="x x-first x-last">it</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L100" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="100"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R100" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="100"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L101" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="101"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;<span class="x x-first x-last">use</span>&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R101" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="101"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;<span class="x x-first x-last">youth</span>&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L102" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="102"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R102" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="102"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L103" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="103"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla<span class="x x-first x-last">nt</span>&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R103" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="103"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L104" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="104"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R104" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="104"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L105" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="105"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R105" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="105"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">had</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L106" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="106"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R106" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="106"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L107" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="107"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>ciss<span class="x x-first x-last">itud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R107" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="107"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisse<span class="x x-first x-last">d</span>s&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L108" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="108"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R108" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="108"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L109" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="109"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R109" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="109"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssit<span class="x x-first x-last">it</span>udes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L110" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="110"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R110" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="110"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L111" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="111"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;vicissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R111" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="111"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;vicissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L112" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="112"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R112" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="112"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L113" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="113"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R113" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="113"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L114" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="114"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R114" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="114"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L115" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="115"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R115" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="115"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L116" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="116"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R116" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="116"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L117" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="117"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vicis</span>situdes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R117" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="117"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>sit<span class="x x-first x-last">it</span>udes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L118" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="118"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R118" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="118"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L119" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="119"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R119" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="119"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water<span class="x x-first x-last">p</span>&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L120" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="120"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R120" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="120"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L121" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="121"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R121" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="121"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use<span class="x x-first x-last">d</span>&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L122" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="122"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R122" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="122"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L123" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="123"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plan<span class="x x-first x-last">t</span>&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R123" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="123"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plan&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L124" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="124"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R124" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="124"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L125" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="125"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R125" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="125"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L126" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="126"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R126" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="126"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L127" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="127"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ni<span class="x x-first x-last">nety</span>&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R127" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="127"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ni<span class="x x-first x-last">ght</span>&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L128" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="128"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R128" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="128"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L129" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="129"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R129" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="129"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L130" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="130"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R130" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="130"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L131" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="131"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">u</span>nt<span class="x x-first x-last">il</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R131" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="131"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">i</span>nt<span class="x x-first x-last">o</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L132" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="132"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R132" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="132"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L133" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="133"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;r<span class="x x-first x-last">o</span>bust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R133" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="133"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;r<span class="x x-first x-last">u</span>bust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L134" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="134"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R134" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="134"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L135" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="135"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R135" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="135"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L136" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="136"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R136" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="136"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L137" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="137"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R137" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="137"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L138" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="138"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R138" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="138"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L139" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="139"></td>
+      <td class="blob-code blob-code-deletion base"><span class="x x-first x-last">the</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R139" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="139"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;but</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L140" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="140"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R140" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="140"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L141" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="141"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R141" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="141"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;fo<span class="x x-first x-last">u</span>r&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L142" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="142"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R142" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="142"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L143" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="143"></td>
+      <td class="blob-code blob-code-deletion base">th<span class="x x-first x-last">e</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R143" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="143"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>th<span class="x x-first x-last">at</span>&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L144" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="144"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R144" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="144"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L145" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="145"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vici</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R145" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="145"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">dece</span>ssitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L146" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="146"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R146" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="146"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L147" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="147"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;<span class="x x-first x-last">f</span>or&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R147" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="147"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;or&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L148" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="148"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R148" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="148"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L149" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="149"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R149" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="149"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">d</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L150" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="150"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R150" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="150"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L151" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="151"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R151" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="151"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L152" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="152"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R152" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="152"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L153" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="153"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R153" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="153"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L154" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="154"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R154" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="154"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L155" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="155"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R155" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="155"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L156" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="156"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R156" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="156"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L157" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="157"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R157" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="157"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L158" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="158"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R158" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="158"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L159" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="159"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla<span class="x x-first x-last">n</span>t&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R159" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="159"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plat<span class="x x-first x-last">form</span>&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L160" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="160"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R160" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="160"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L161" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="161"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R161" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="161"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cis<span class="x x-first x-last">it</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L162" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="162"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R162" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="162"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L163" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="163"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissi<span class="x x-first x-last">tud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R163" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="163"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissi<span class="x x-first x-last">v</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L164" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="164"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R164" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="164"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L165" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="165"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R165" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="165"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L166" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="166"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R166" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="166"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L167" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="167"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissi<span class="x x-first x-last">tud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R167" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="167"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissi<span class="x x-first x-last">v</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L168" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="168"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R168" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="168"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L169" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="169"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R169" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="169"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">des</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L170" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="170"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R170" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="170"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L171" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="171"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R171" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="171"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">sed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L172" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="172"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R172" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="172"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L173" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="173"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R173" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="173"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;rob<span class="x x-first x-last">b</span>ust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L174" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="174"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R174" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="174"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L175" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="175"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;<span class="x x-first x-last">use</span>&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R175" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="175"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;<span class="x x-first x-last">youth</span>&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L176" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="176"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R176" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="176"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L177" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="177"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissi<span class="x x-first x-last">tud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R177" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="177"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissi<span class="x x-first x-last">v</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L178" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="178"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R178" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="178"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L179" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="179"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cis<span class="x x-first x-last">s</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R179" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="179"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L180" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="180"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R180" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="180"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L181" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="181"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla<span class="x x-first x-last">nt</span>&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R181" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="181"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;pla&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L182" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="182"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R182" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="182"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L183" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="183"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">viciss</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R183" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="183"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">decessit</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L184" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="184"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R184" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="184"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L185" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="185"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water<span class="x x-first x-last">&nbsp;</span>power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R185" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="185"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;waterpower&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L186" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="186"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R186" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="186"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L187" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="187"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R187" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="187"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">hed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L188" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="188"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R188" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="188"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L189" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="189"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robus<span class="x x-first x-last">t</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R189" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="189"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;rob<span class="x x-first x-last">b</span>us<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L190" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="190"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R190" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="190"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L191" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="191"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>ciss<span class="x x-first x-last">itud</span>es&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">i</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R191" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="191"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cisse<span class="x x-first x-last">d</span>s&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;<span class="x x-first x-last">a</span>n&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L192" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="192"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R192" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="192"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L193" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="193"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">viciss</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R193" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="193"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">decesit</span>itudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L194" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="194"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R194" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="194"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L195" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="195"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;<span class="x x-first x-last">in</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R195" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="195"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;<span class="x x-first x-last">and</span>&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L196" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="196"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R196" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="196"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L197" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="197"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">it</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">u</span>nt<span class="x x-first x-last">il</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R197" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="197"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;<span class="x x-first x-last">and</span>&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;<span class="x x-first x-last">i</span>nt<span class="x x-first x-last">o</span>&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L198" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="198"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R198" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="198"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L199" class="blob-num blob-num-deletion base js-linkable-line-number" data-line-number="199"></td>
+      <td class="blob-code blob-code-deletion base">the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">vi</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      <td id="R199" class="blob-num blob-num-addition base js-linkable-line-number" data-line-number="199"></td>
+      <td class="blob-code blob-code-addition base"><span class="x x-first x-last">&nbsp;</span>the&nbsp;dynamo&nbsp;electric&nbsp;machine&nbsp;though&nbsp;small&nbsp;was&nbsp;robust<span class="x x-first x-last">ed</span>&nbsp;for&nbsp;under&nbsp;all&nbsp;the&nbsp;varying&nbsp;speeds&nbsp;of&nbsp;water&nbsp;power&nbsp;and&nbsp;the&nbsp;<span class="x x-first x-last">de</span>cissitudes&nbsp;of&nbsp;the&nbsp;plant&nbsp;to&nbsp;which&nbsp;it&nbsp;belonged&nbsp;it&nbsp;continued&nbsp;in&nbsp;active&nbsp;use<span class="x x-first x-last">d</span>&nbsp;until&nbsp;eighteen&nbsp;ninety&nbsp;nine&nbsp;seventeen&nbsp;years</td>
+      </tr>
+      <tr>
+      <td id="L200" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="200"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R200" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="200"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+      <tr>
+      <td id="L201" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="201"></td>
+      <td class="blob-code blob-code-context base"></td>
+      <td id="R201" class="blob-num blob-num-context base js-linkable-line-number" data-line-number="201"></td>
+      <td class="blob-code blob-code-context base"></td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+  </div>
+  </div>
+</body>
+</html>

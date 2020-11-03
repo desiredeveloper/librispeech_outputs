@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<script> 
+
+document.onload = reloadpage;
+
+function reloadpage() {
+    var total = 1213;
+    var randomPage = Math.floor(Math.random() * total );
+    randomUrl = 'output/index' + randomPage + '.html';
+    console.log(randomUrl)
+    document.location = randomUrl
+}
+
+</script>
+
+
+</head>
+</html>
